@@ -1,3 +1,5 @@
+import { OrderItemStatus } from './../utils/enum';
+
 import { ItemType } from './../utils/enum';
 
 import { objectId } from './common';
@@ -27,6 +29,8 @@ export type IOrderItemAllSchema = TypeOf<typeof orderItemAllSchema>;
 const orderItemCreateSchema = z
   .object({
     // <creating-property-create-schema />
+    status: z.nativeEnum(OrderItemStatus).optional(),
+
     price: z.number().optional(),
     itemType: z.nativeEnum(ItemType),
     quantity: z.number(),
@@ -40,6 +44,8 @@ export type IOrderItemCreateSchema = TypeOf<typeof orderItemCreateSchema>;
 const orderItemUpdateSchema = z
   .object({
     // <creating-property-update-schema />
+    status: z.nativeEnum(OrderItemStatus).optional(),
+
     price: z.number().optional().optional(),
 
     itemType: z.nativeEnum(ItemType).optional(),
@@ -54,9 +60,18 @@ const orderItemUpdateSchema = z
 
 export type IOrderItemUpdateSchema = TypeOf<typeof orderItemUpdateSchema>;
 
+const orderItemReturnSchema = z
+  .object({
+    orderId: objectId.optional(),
+  })
+  .strict();
+
+export type IOrderItemReturnSchema = TypeOf<typeof orderItemReturnSchema>;
+
 export default {
   orderItemId: orderItemIdSchema,
   orderItemAll: orderItemAllSchema,
   orderItemCreate: orderItemCreateSchema,
   orderItemUpdate: orderItemUpdateSchema,
+  orderItemReturn: orderItemReturnSchema,
 };

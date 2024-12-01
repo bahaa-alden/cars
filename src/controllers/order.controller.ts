@@ -1,5 +1,9 @@
 import { Response, ParsedRequest } from 'express';
-import { InternalError, NotFoundError } from '../core/ApiError';
+import {
+  BadRequestError,
+  InternalError,
+  NotFoundError,
+} from '../core/ApiError';
 import asyncHandler from '../middlewares/asyncHandler';
 import { NextFunction } from 'express-serve-static-core';
 import {
@@ -16,6 +20,7 @@ import { defaultOrderParams } from '../utils/order';
 import { defaultPaginationParams } from '../utils/pagination';
 import { needRecord } from '../utils/record';
 import { createOrderItem } from '../services/internal/create-order-item';
+import { userRepository } from '../database/repositories/user.repository';
 
 export class OrderController {
   // Get all Orders by author
@@ -73,6 +78,14 @@ export class OrderController {
       next: NextFunction,
     ): Promise<void> => {
       const newOrder = req.valid.body;
+      const user = needRecord(await userRepository.findById(newOrder.userId));
+
+      if (user.balance < newOrder.totalPrice) {
+        throw new BadRequestError('User dose not have enough money');
+      }
+      user.balance = user.balance - newOrder.totalPrice;
+      await userRepository.patchById(user.id, user);
+
       const order = await orderRepository.insert(newOrder);
 
       if (newOrder.orderItems) {
@@ -86,6 +99,7 @@ export class OrderController {
       if (order === null) {
         throw new InternalError();
       }
+
       res.created({ message: 'Order has been created', data: order });
     },
   );

@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 export interface IUser extends MongooseDocument {
   id: string;
   // <creating-property-interface />
+  balance: number;
   status?: UserStatus;
   name: string;
   email: string;
@@ -27,6 +28,10 @@ export interface IUser extends MongooseDocument {
 const userSchema = new Schema<IUser>(
   {
     // <creating-property-schema />
+    balance: {
+      type: Number,
+      default: 0,
+    },
     status: {
       type: String,
       enum: Object.values(UserStatus),

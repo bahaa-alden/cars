@@ -1,3 +1,5 @@
+import { OrderItemStatus } from './../../utils/enum';
+
 import { ItemType } from './../../utils/enum';
 
 import { IProduct } from './product.model';
@@ -12,7 +14,9 @@ import { omit } from 'lodash';
 export interface IOrderItem extends MongooseDocument {
   id: string;
   // <creating-property-interface />
-  price?: number;
+  status?: OrderItemStatus;
+
+  price: number;
 
   itemType: ItemType;
 
@@ -32,6 +36,11 @@ export interface IOrderItem extends MongooseDocument {
 const orderItemSchema: Schema = new Schema<IOrderItem>(
   {
     // <creating-property-schema />
+    status: {
+      type: String,
+      enum: Object.values(OrderItemStatus),
+      default: OrderItemStatus.notreturned,
+    },
     price: {
       type: Number,
     },

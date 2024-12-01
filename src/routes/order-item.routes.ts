@@ -72,6 +72,18 @@ export class OrderItemRoutes {
       validator({ params: orderItemSchema.orderItemId }),
       orderItemController.deleteOrderItem,
     );
+
+    // RETURN ORDERITEM BY ID
+    this.router.post(
+      '/:id',
+      restrict(USER, ADMIN),
+      authorizationMiddleware.authorization,
+      validator({
+        params: orderItemSchema.orderItemId,
+        body: orderItemSchema.orderItemReturn,
+      }),
+      orderItemController.returnOrderItem,
+    );
   }
 }
 

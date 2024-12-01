@@ -2,6 +2,7 @@ import * as swaggerJsdoc from 'swagger-jsdoc';
 import {
   OrderItem,
   createOrderItem,
+  returnOrderItem,
   updateOrderItem,
 } from './routes/order-item.swagger';
 import { Order, createOrder, updateOrder } from './routes/order.swagger';
@@ -53,6 +54,7 @@ const options = {
     ],
     components: {
       schemas: {
+        returnOrderItem,
         OrderItem,
         createOrderItem,
         updateOrderItem,

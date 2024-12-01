@@ -11,11 +11,16 @@ import {
   IOrderItemIdSchema,
   IOrderItemCreateSchema,
   IOrderItemUpdateSchema,
+  IOrderItemReturnSchema,
 } from '../schemas/order-item.schema';
 import { defaultOrderParams } from '../utils/order';
 import { defaultPaginationParams } from '../utils/pagination';
 import { needRecord } from '../utils/record';
 import { createOrderItem as createOrderItemService } from '../services/internal/create-order-item';
+import { differenceInDays } from 'date-fns';
+import { userRepository } from '../database/repositories/user.repository';
+import { orderRepository } from '../database/repositories/order.repository';
+import { OrderItemStatus } from '../utils/enum';
 
 export class OrderItemController {
   // Get all OrderItems by author
@@ -29,7 +34,6 @@ export class OrderItemController {
         filter: {
           // filters
           itemType: req.valid.query.itemType,
-
           orderId: req.valid.query.orderId,
         },
         search: req.valid.query.search,
@@ -113,6 +117,35 @@ export class OrderItemController {
 
       await orderItemRepository.deleteById(orderItem.id);
       res.noContent({ message: 'OrderItem deleted successfully' });
+    },
+  );
+
+  public returnOrderItem = asyncHandler(
+    async (
+      req: ParsedRequest<IOrderItemReturnSchema, void, IOrderItemIdSchema>,
+      res: Response,
+    ): Promise<void> => {
+      const orderItem = needRecord(
+        await orderItemRepository.findById(req.valid.params.id),
+        new NotFoundError('OrderItem not found'),
+      );
+
+      const order = needRecord(
+        await orderRepository.findById(orderItem.orderId),
+      );
+
+      const weeks = Math.ceil(
+        differenceInDays(new Date(), orderItem.createdAt) / 7,
+      );
+
+      const user = needRecord(await userRepository.findById(order.userId));
+
+      user.balance = user.balance - (weeks - 1) * orderItem.price;
+      await userRepository.patchById(user.id, user);
+
+      orderItem.status = OrderItemStatus.returned;
+      await orderItemRepository.patchById(orderItem.id, orderItem);
+      res.ok({ message: 'success', data: orderItem });
     },
   );
 }

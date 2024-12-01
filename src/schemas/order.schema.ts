@@ -60,7 +60,7 @@ const orderCreateSchema = z
     // <creating-property-create-schema />
     orderItems: z.array(orderItemsCreateSchema).optional(),
 
-    totalPrice: z.number().optional(),
+    totalPrice: z.number(),
 
     orderDate: stringToDate,
 

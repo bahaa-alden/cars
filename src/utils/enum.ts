@@ -25,6 +25,10 @@ export enum Env {
 }
 
 // <creating-enum-type />
+export enum OrderItemStatus {
+  returned = 'returned',
+  notreturned = 'notreturned',
+}
 
 export enum ProductType {
   piece = 'piece',

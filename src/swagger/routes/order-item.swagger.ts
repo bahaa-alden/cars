@@ -217,6 +217,45 @@
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ *   post:
+ *     summary: Return a orderItem
+ *     description: USER,ADMIN can use this router.
+ *     tags: [order-items]
+ *     security:
+ *       - Bearer: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: OrderItem id
+ *     requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/returnOrderItem'
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: success
+ *                 data:
+ *                     $ref: '#/components/schemas/OrderItem'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
  */
 
 export const OrderItem = {
@@ -224,6 +263,11 @@ export const OrderItem = {
   properties: {
     id: { type: 'string' },
     // property
+
+    status: {
+      type: 'string',
+      enum: ['returned', 'notreturned'],
+    },
 
     price: {
       type: 'number',
@@ -249,6 +293,8 @@ export const OrderItem = {
   example: {
     id: '5ebac534954b54139806c112',
     // property example
+    status: 'returned',
+
     price: 3200,
 
     itemType: 'rent',
@@ -267,6 +313,11 @@ export const createOrderItem = {
   type: 'object',
   properties: {
     // create property
+
+    status: {
+      type: 'string',
+      enum: ['returned', 'notreturned'],
+    },
 
     price: {
       type: 'number',
@@ -291,6 +342,8 @@ export const createOrderItem = {
   },
   example: {
     // create property example
+    status: 'returned',
+
     price: 3200,
 
     itemType: 'rent',
@@ -311,6 +364,11 @@ export const updateOrderItem = {
   type: 'object',
   properties: {
     // update property
+
+    status: {
+      type: 'string',
+      enum: ['returned', 'notreturned'],
+    },
 
     price: {
       type: 'number',
@@ -335,6 +393,8 @@ export const updateOrderItem = {
   },
   example: {
     // update property example
+    status: 'returned',
+
     price: 3200,
 
     itemType: 'rent',
@@ -343,6 +403,18 @@ export const updateOrderItem = {
 
     productId: '673c40cd59e293827f79e398',
 
+    orderId: '673c40cd59e293827f79e398',
+  },
+};
+
+export const returnOrderItem = {
+  type: 'object',
+  properties: {
+    orderId: {
+      type: 'string',
+    },
+  },
+  example: {
     orderId: '673c40cd59e293827f79e398',
   },
 };

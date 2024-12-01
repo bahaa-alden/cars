@@ -1,5 +1,3 @@
-import { stringToDate } from './common';
-
 import { RoleCode, UserStatus } from './../utils/enum';
 import { z, TypeOf } from 'zod';
 import {
@@ -8,6 +6,7 @@ import {
   orderDirection,
   page,
   pageSize,
+  stringToDate,
 } from './common';
 
 const userIdSchema = z.object({
@@ -19,6 +18,7 @@ export type IUserIdSchema = TypeOf<typeof userIdSchema>;
 const userUpdateSchema = z
   .object({
     // <creating-property-update-schema />
+    balance: z.number().optional().optional(),
     status: z.nativeEnum(UserStatus).optional(),
     name: z.string().optional(),
     email: z.string().email().optional(),
@@ -44,6 +44,7 @@ const createUserSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
   role: z.nativeEnum(RoleCode).optional(),
+  balance: z.number().optional(),
 });
 
 export type ICreateUserSchema = TypeOf<typeof createUserSchema>;

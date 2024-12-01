@@ -302,6 +302,7 @@ export const User = {
     id: { type: 'string' },
     // property
 
+    balance: { type: 'number' },
     email: { type: 'string', format: 'email' },
     name: { type: 'string' },
     role: { type: 'string', enum: Object.values(RoleCode) },
@@ -311,6 +312,7 @@ export const User = {
     id: '5ebac534954b54139806c112',
     // property example
 
+    balance: 2500,
     email: 'user@gmail.com',
     name: 'bahaa alden abdo',
     role: 'USER',
@@ -322,6 +324,7 @@ export const createUser = {
   properties: {
     // create property
 
+    balance: { type: 'number' },
     name: { type: 'string' },
     email: { type: 'string' },
     password: { type: 'string' },
@@ -330,6 +333,7 @@ export const createUser = {
   example: {
     // create property example
 
+    balance: 2500,
     name: 'Bahaa abdo',
     email: 'bad@gmail.com',
     password: '123454321',
@@ -361,6 +365,7 @@ export const updateUser = {
     name: { type: 'string' },
     email: { type: 'string' },
     role: { type: 'string', enum: Object.values(RoleCode) },
+    balance: { type: 'number' },
   },
   example: {
     // update property example
@@ -368,5 +373,6 @@ export const updateUser = {
     name: 'Bahaa alden',
     email: 'ba@gmail.com',
     role: 'USER',
+    balance: 2500,
   },
 };
