@@ -15,6 +15,7 @@ import {
 import { defaultOrderParams } from '../utils/order';
 import { defaultPaginationParams } from '../utils/pagination';
 import { needRecord } from '../utils/record';
+import { createOrderItem } from '../services/internal/create-order-item';
 
 export class OrderController {
   // Get all Orders by author
@@ -73,6 +74,15 @@ export class OrderController {
     ): Promise<void> => {
       const newOrder = req.valid.body;
       const order = await orderRepository.insert(newOrder);
+
+      if (newOrder.orderItems) {
+        await Promise.all(
+          newOrder.orderItems.map(
+            async (item) => await createOrderItem(item, order.id),
+          ),
+        );
+      }
+
       if (order === null) {
         throw new InternalError();
       }

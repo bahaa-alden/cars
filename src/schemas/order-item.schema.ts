@@ -18,9 +18,7 @@ const orderItemAllSchema = z.object({
   orderDirection,
   search: z.string().optional(),
   itemType: z.nativeEnum(ItemType).optional(),
-
   orderId: objectId.optional(),
-
   fields: z.string().optional(),
 });
 
@@ -30,13 +28,9 @@ const orderItemCreateSchema = z
   .object({
     // <creating-property-create-schema />
     price: z.number().optional(),
-
     itemType: z.nativeEnum(ItemType),
-
     quantity: z.number(),
-
     productId: objectId,
-
     orderId: objectId,
   })
   .strict();

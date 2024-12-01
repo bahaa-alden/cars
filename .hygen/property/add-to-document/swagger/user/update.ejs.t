@@ -15,7 +15,7 @@ after: // update property
 <% if (kind !== 'object') {  -%>},<% }  -%>
 <% if (kind === 'object') {  -%>
 'object',properties: {
-//  update properties <%= property %>
+// update properties <%= property %>
 }   
 <% if ( isArray) { -%> } <% } -%> },<% }  -%>
 <% } -%>

@@ -1,5 +1,5 @@
 import { Response, ParsedRequest } from 'express';
-import { InternalError, NotFoundError } from '../core/ApiError';
+import { NotFoundError } from '../core/ApiError';
 import asyncHandler from '../middlewares/asyncHandler';
 import { NextFunction } from 'express-serve-static-core';
 import {
@@ -15,8 +15,7 @@ import {
 import { defaultOrderParams } from '../utils/order';
 import { defaultPaginationParams } from '../utils/pagination';
 import { needRecord } from '../utils/record';
-import { productRepository } from '../database/repositories/product.repository';
-import { ItemType } from '../utils/enum';
+import { createOrderItem as createOrderItemService } from '../services/internal/create-order-item';
 
 export class OrderItemController {
   // Get all OrderItems by author
@@ -73,23 +72,7 @@ export class OrderItemController {
       next: NextFunction,
     ): Promise<void> => {
       const newOrderItem = req.valid.body;
-      const product = needRecord(
-        await productRepository.findById(newOrderItem.productId),
-        new NotFoundError('Product not found'),
-      );
-
-      if (!newOrderItem.price) {
-        const servicePrice =
-          newOrderItem.itemType === ItemType.purchase
-            ? product.purchasePrice
-            : product.rentPrice;
-        newOrderItem.price = servicePrice * newOrderItem.quantity;
-      }
-
-      const orderItem = await orderItemRepository.insert(newOrderItem);
-      if (orderItem === null) {
-        throw new InternalError();
-      }
+      const orderItem = await createOrderItemService(newOrderItem);
       res.created({ message: 'OrderItem has been created', data: orderItem });
     },
   );

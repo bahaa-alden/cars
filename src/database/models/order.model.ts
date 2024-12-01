@@ -1,7 +1,5 @@
 import { IUser } from './user.model';
-
 import mongoose from 'mongoose';
-
 import { model, Schema, type Document as MongooseDocument } from 'mongoose';
 import { omit } from 'lodash';
 import { IOrderItem } from './order-item.model';
@@ -10,7 +8,6 @@ export interface IOrder extends MongooseDocument {
   id: string;
   // <creating-property-interface />
   totalPrice?: number;
-
   orderDate: Date;
   userId: IUser['_id'];
   user: IUser;

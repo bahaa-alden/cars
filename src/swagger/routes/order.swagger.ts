@@ -230,6 +230,20 @@ export const Order = {
     id: { type: 'string' },
     // property
 
+    orderItems: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          // properties orderItems
+          quantity: { type: 'number' },
+          price: { type: 'number' },
+          itemType: { type: 'string', enum: ['rent', 'purchase'] },
+          product: { type: 'string' },
+        },
+      },
+    },
+
     totalPrice: {
       type: 'number',
     },
@@ -245,6 +259,19 @@ export const Order = {
   example: {
     id: '5ebac534954b54139806c112',
     // property example
+    orderItems: [
+      {
+        // property example orderItems
+        productId: '673c40cd59e293827f79e398',
+
+        quantity: 1,
+
+        itemType: '',
+
+        price: 2500,
+      },
+    ],
+
     totalPrice: 2500,
 
     orderDate: '2024-11-24T16:35:04.438Z',
@@ -260,6 +287,20 @@ export const createOrder = {
   properties: {
     // create property
 
+    orderItems: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          // create properties orderItems
+          product: { type: 'string' },
+          price: { type: 'number' },
+          itemType: { type: 'string', enum: ['rent', 'purchase'] },
+          quantity: { type: 'number' },
+        },
+      },
+    },
+
     totalPrice: {
       type: 'number',
     },
@@ -274,6 +315,19 @@ export const createOrder = {
   },
   example: {
     // create property example
+    orderItems: [
+      {
+        // create property example orderItems
+        productId: '673c40cd59e293827f79e398',
+
+        quantity: 1,
+
+        itemType: '',
+
+        price: 2500,
+      },
+    ],
+
     totalPrice: 2500,
 
     orderDate: '2024-11-24T16:35:04.438Z',
@@ -283,6 +337,10 @@ export const createOrder = {
   required: [
     // required property
 
+    'orderItems.product',
+
+    'orderItems.quantity',
+
     'orderDate',
   ],
 };
@@ -290,6 +348,19 @@ export const updateOrder = {
   type: 'object',
   properties: {
     // update property
+    orderItems: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          // update properties orderItems
+          product: { type: 'string' },
+          price: { type: 'number' },
+          itemType: { type: 'string', enum: ['rent', 'purchase'] },
+          quantity: { type: 'number' },
+        },
+      },
+    },
 
     totalPrice: {
       type: 'number',
@@ -305,6 +376,19 @@ export const updateOrder = {
   },
   example: {
     // update property example
+    orderItems: [
+      {
+        // update property example orderItems
+        productId: '673c40cd59e293827f79e398',
+
+        quantity: 1,
+
+        itemType: '',
+
+        price: 2500,
+      },
+    ],
+
     totalPrice: 2500,
 
     orderDate: '2024-11-24T16:35:04.438Z',
