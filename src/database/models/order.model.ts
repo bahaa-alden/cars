@@ -8,7 +8,6 @@ export interface IOrder extends MongooseDocument {
   id: string;
   // <creating-property-interface />
   totalPrice?: number;
-  orderDate: Date;
   userId: IUser['_id'];
   user: IUser;
   orderItems: IOrderItem[];
@@ -22,9 +21,6 @@ const orderSchema: Schema = new Schema<IOrder>(
     // <creating-property-schema />
     totalPrice: {
       type: Number,
-    },
-    orderDate: {
-      type: Date,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

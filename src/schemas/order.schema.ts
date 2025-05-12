@@ -59,11 +59,7 @@ const orderCreateSchema = z
   .object({
     // <creating-property-create-schema />
     orderItems: z.array(orderItemsCreateSchema).optional(),
-
     totalPrice: z.number(),
-
-    orderDate: stringToDate,
-
     userId: objectId,
   })
   .strict();
@@ -74,11 +70,7 @@ const orderUpdateSchema = z
   .object({
     // <creating-property-update-schema />
     orderItems: z.array(orderItemsUpdateSchema).optional(),
-
-    totalPrice: z.number().optional().optional(),
-
-    orderDate: stringToDate.optional(),
-
+    totalPrice: z.number().optional(),
     userId: objectId.optional(),
   })
   .strict();

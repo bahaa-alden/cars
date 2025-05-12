@@ -247,11 +247,6 @@ export const Order = {
     totalPrice: {
       type: 'number',
     },
-
-    orderDate: {
-      type: 'date',
-    },
-
     userId: {
       type: 'string',
     },
@@ -271,13 +266,8 @@ export const Order = {
         price: 2500,
       },
     ],
-
     totalPrice: 2500,
-
-    orderDate: '2024-11-24T16:35:04.438Z',
-
     userId: '673c40cd59e293827f79e398',
-
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
   },
@@ -305,10 +295,6 @@ export const createOrder = {
       type: 'number',
     },
 
-    orderDate: {
-      type: 'date',
-    },
-
     userId: {
       type: 'string',
     },
@@ -330,8 +316,6 @@ export const createOrder = {
 
     totalPrice: 2500,
 
-    orderDate: '2024-11-24T16:35:04.438Z',
-
     userId: '673c40cd59e293827f79e398',
   },
   required: [
@@ -341,7 +325,7 @@ export const createOrder = {
 
     'orderItems.quantity',
 
-    'orderDate',
+    'totalPrice',
   ],
 };
 export const updateOrder = {
@@ -365,11 +349,6 @@ export const updateOrder = {
     totalPrice: {
       type: 'number',
     },
-
-    orderDate: {
-      type: 'date',
-    },
-
     userId: {
       type: 'string',
     },
@@ -390,9 +369,6 @@ export const updateOrder = {
     ],
 
     totalPrice: 2500,
-
-    orderDate: '2024-11-24T16:35:04.438Z',
-
     userId: '673c40cd59e293827f79e398',
   },
 };
