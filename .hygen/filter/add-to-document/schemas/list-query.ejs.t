@@ -12,6 +12,8 @@ after: search
     <%= h.inflection.camelize(property, true) %>: z.nativeEnum(<%= EnumType %>).optional(),
 <% } else if(type === 'date') { -%>
   <%= h.inflection.camelize(property, true) %>: stringToDate.optional(),
+<% } else if(type === 'number') { -%>
+  <%= h.inflection.camelize(property, true) %>: positiveInteger.optional(),
 <% } else if(type === 'boolean') { -%>
   <%= h.inflection.camelize(property, true) %>: booleanString.optional(),
 <% } else { -%>

@@ -49,6 +49,12 @@
  *     parameters:
   # filters
  *       - in: query
+ *         name: price
+ *         schema:
+ *           type: number
+ *         description: filter for  price field
+
+ *       - in: query
  *         name: rentPriceGte
  *         schema:
  *           type: number

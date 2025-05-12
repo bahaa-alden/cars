@@ -11,22 +11,15 @@ import { selectedFields } from '../../utils/projection';
 
 export interface ProductFilterOptions {
   //filters
+  price?: number;
   rentPriceGte?: number;
-
   rentPriceLte?: number;
-
   purchasePriceGte?: number;
-
   purchasePriceLte?: number;
-
   productionYear?: string;
-
   type?: ProductType;
-
   categoryId?: string;
-
   brandId?: string;
-
   dateFrom?: Date;
   dateTo?: Date;
 }
@@ -61,6 +54,10 @@ export class ProductRepository extends BaseRepository<IProduct> {
     const { order, pagination, search, fields, filter } = options;
 
     const query: FilterQuery<IProduct> = { deletedAt: null };
+    if (filter?.price) {
+      query.price = filter.price;
+    }
+
     if (filter?.rentPriceGte) {
       query.rentPrice = { $gte: filter.rentPriceGte };
     }

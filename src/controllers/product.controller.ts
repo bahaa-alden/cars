@@ -27,22 +27,15 @@ export class ProductController {
       const options: ProductFindOptions = {
         filter: {
           // filters
+          price: req.valid.query.price,
           rentPriceGte: req.valid.query.rentPriceGte,
-
           rentPriceLte: req.valid.query.rentPriceLte,
-
           purchasePriceGte: req.valid.query.purchasePriceGte,
-
           purchasePriceLte: req.valid.query.purchasePriceLte,
-
           productionYear: req.valid.query.productionYear,
-
           type: req.valid.query.type,
-
           categoryId: req.valid.query.categoryId,
-
           brandId: req.valid.query.brandId,
-
           dateFrom: req.valid.query.dateFrom,
           dateTo: req.valid.query.dateTo,
         },

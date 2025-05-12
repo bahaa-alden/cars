@@ -10,6 +10,8 @@ skip_if: <% if (kind === 'reference') { -%>import { objectId <% } else if (kind 
   import { <%= EnumType %> } from './../utils/enum';
 <% } else if (kind === 'fromTo' || (type && type === 'date')) { -%>
   import { stringToDate } from './common'
+<% } else if (type && type === 'number') { -%>
+  import { positiveInteger } from './common'
 <% } else if (type && type === 'boolean') { -%>
   import { booleanString } from './common'
 <% } -%>

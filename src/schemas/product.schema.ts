@@ -1,9 +1,7 @@
+import { positiveInteger } from './common';
 import { ProductType } from './../utils/enum';
-
 import { objectId } from './common';
-
 import { stringToDate } from './common';
-
 import { z, type TypeOf } from 'zod';
 import { orderColumn, orderDirection, page, pageSize } from './common';
 
@@ -19,18 +17,13 @@ const productAllSchema = z.object({
   orderColumn,
   orderDirection,
   search: z.string().optional(),
-  rentPriceGte: z.number().optional(),
-
-  rentPriceLte: z.number().optional(),
-
-  purchasePriceGte: z.number().optional(),
-
-  purchasePriceLte: z.number().optional(),
-
+  price: positiveInteger.optional(),
+  rentPriceGte: positiveInteger.optional(),
+  rentPriceLte: positiveInteger.optional(),
+  purchasePriceGte: positiveInteger.optional(),
+  purchasePriceLte: positiveInteger.optional(),
   productionYear: z.string().optional(),
-
   type: z.nativeEnum(ProductType).optional(),
-
   categoryId: objectId.optional(),
   brandId: objectId.optional(),
   dateFrom: stringToDate.optional(),
@@ -43,11 +36,8 @@ export type IProductAllSchema = TypeOf<typeof productAllSchema>;
 const productCreateSchema = z
   .object({
     // <creating-property-create-schema />
-
     colors: z.array(z.string()).optional(),
-
     productionYear: z.string(),
-
     type: z.nativeEnum(ProductType).optional(),
     featureIds: objectId.array(),
     brandId: objectId,
@@ -64,11 +54,8 @@ export type IProductCreateSchema = TypeOf<typeof productCreateSchema>;
 const productUpdateSchema = z
   .object({
     // <creating-property-update-schema />
-
     colors: z.array(z.string()).optional().optional(),
-
     productionYear: z.string().optional(),
-
     type: z.nativeEnum(ProductType).optional(),
     featureIds: objectId.array().optional(),
     brandId: objectId.optional(),
