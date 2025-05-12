@@ -26,6 +26,11 @@ export enum Env {
 
 // <creating-enum-type />
 
+export enum ProductType {
+  piece = 'piece',
+  car = 'car',
+}
+
 export enum ItemType {
   rent = 'rent',
   purchase = 'purchase',

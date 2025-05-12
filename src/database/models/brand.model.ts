@@ -14,6 +14,7 @@ export interface IBrand extends MongooseDocument {
 const brandSchema: Schema = new Schema<IBrand>(
   {
     // <creating-property-schema />
+    //TODO
     name: {
       type: String,
       index: 'text',

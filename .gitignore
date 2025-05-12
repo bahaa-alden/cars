@@ -8,6 +8,7 @@
 # Local History for Visual Studio Code
 .history/
 # Built Visual Studio Code Extensions
+/dist
 .env
 *.vsix
 node_modules

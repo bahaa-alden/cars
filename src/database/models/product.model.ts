@@ -1,6 +1,6 @@
-import { IFeature } from './feature.model';
+import { ProductType } from './../../utils/enum';
 
-import { IUser } from './user.model';
+import { IFeature } from './feature.model';
 
 import { IBrand } from './brand.model';
 
@@ -15,11 +15,14 @@ export interface IProduct extends MongooseDocument {
   id: string;
   // <creating-property-interface />
 
+  colors?: string[];
+
+  productionYear: string;
+
+  type?: ProductType;
+
   featureIds: Array<IFeature['_id']>;
   features: Array<IFeature>;
-
-  userId: IUser['_id'];
-  user: IUser;
 
   brandId: IBrand['_id'];
   brand: IBrand;
@@ -40,6 +43,19 @@ export interface IProduct extends MongooseDocument {
 const productSchema: Schema = new Schema<IProduct>(
   {
     // <creating-property-schema />
+    colors: {
+      type: [String],
+      default: [],
+    },
+    productionYear: {
+      type: String,
+      index: 'text',
+    },
+    type: {
+      type: String,
+      enum: Object.values(ProductType),
+      default: ProductType.car,
+    },
     featureIds: {
       type: [
         {
@@ -50,11 +66,6 @@ const productSchema: Schema = new Schema<IProduct>(
       ],
     },
 
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-
     brandId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Brand',
@@ -62,9 +73,11 @@ const productSchema: Schema = new Schema<IProduct>(
 
     rentPrice: {
       type: Number,
+      default: 0,
     },
     purchasePrice: {
       type: Number,
+      default: 0,
     },
     quantity: {
       type: Number,
@@ -74,6 +87,7 @@ const productSchema: Schema = new Schema<IProduct>(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
     },
+    //TODO Local
     name: {
       type: String,
       index: 'text',
@@ -105,14 +119,6 @@ productSchema.virtual('brand', {
   localField: 'brandId',
   foreignField: '_id',
   ref: 'Brand',
-  justOne: true,
-  match: { deletedAt: null },
-});
-
-productSchema.virtual('user', {
-  localField: 'userId',
-  foreignField: '_id',
-  ref: 'User',
   justOne: true,
   match: { deletedAt: null },
 });

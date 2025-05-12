@@ -1,3 +1,5 @@
+import { ProductType } from './../utils/enum';
+
 import { objectId } from './common';
 
 import { stringToDate } from './common';
@@ -17,15 +19,22 @@ const productAllSchema = z.object({
   orderColumn,
   orderDirection,
   search: z.string().optional(),
-  userId: objectId.optional(),
+  rentPriceGte: z.number().optional(),
+
+  rentPriceLte: z.number().optional(),
+
+  purchasePriceGte: z.number().optional(),
+
+  purchasePriceLte: z.number().optional(),
+
+  productionYear: z.string().optional(),
+
+  type: z.nativeEnum(ProductType).optional(),
 
   categoryId: objectId.optional(),
-
   brandId: objectId.optional(),
-
   dateFrom: stringToDate.optional(),
   dateTo: stringToDate.optional(),
-
   fields: z.string().optional(),
 });
 
@@ -35,20 +44,17 @@ const productCreateSchema = z
   .object({
     // <creating-property-create-schema />
 
+    colors: z.array(z.string()).optional(),
+
+    productionYear: z.string(),
+
+    type: z.nativeEnum(ProductType).optional(),
     featureIds: objectId.array(),
-
-    userId: objectId,
-
     brandId: objectId,
-
     rentPrice: z.number(),
-
     purchasePrice: z.number(),
-
     quantity: z.number().optional(),
-
     categoryId: objectId,
-
     name: z.string(),
   })
   .strict();
@@ -59,20 +65,17 @@ const productUpdateSchema = z
   .object({
     // <creating-property-update-schema />
 
+    colors: z.array(z.string()).optional().optional(),
+
+    productionYear: z.string().optional(),
+
+    type: z.nativeEnum(ProductType).optional(),
     featureIds: objectId.array().optional(),
-
-    userId: objectId.optional(),
-
     brandId: objectId.optional(),
-
     rentPrice: z.number().optional(),
-
     purchasePrice: z.number().optional(),
-
     quantity: z.number().optional().optional(),
-
     categoryId: objectId.optional(),
-
     name: z.string().optional(),
   })
   .strict();

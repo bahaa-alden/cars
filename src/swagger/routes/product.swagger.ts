@@ -49,10 +49,40 @@
  *     parameters:
   # filters
  *       - in: query
- *         name: userId
+ *         name: rentPriceGte
+ *         schema:
+ *           type: number
+ *         description: filter for  rentPriceGte field
+
+ *       - in: query
+ *         name: rentPriceLte
+ *         schema:
+ *           type: number
+ *         description: filter for  rentPriceLte field
+
+ *       - in: query
+ *         name: purchasePriceGte
+ *         schema:
+ *           type: number
+ *         description: filter for  purchasePriceGte field
+
+ *       - in: query
+ *         name: purchasePriceLte
+ *         schema:
+ *           type: number
+ *         description: filter for  purchasePriceLte field
+
+ *       - in: query
+ *         name: productionYear
  *         schema:
  *           type: string
- *         description: filter for userId field
+ *         description: filter for  productionYear field
+
+ *       - in: query
+ *         name: type
+ *         schema:
+ *           type: string
+ *         description: filter for  type field
 
  *       - in: query
  *         name: categoryId
@@ -243,6 +273,22 @@ export const Product = {
     id: { type: 'string' },
     // property
 
+    colors: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+
+    productionYear: {
+      type: 'string',
+    },
+
+    type: {
+      type: 'string',
+      enum: ['piece', 'car'],
+    },
+
     featureIds: {
       type: 'array',
       items: {
@@ -250,7 +296,6 @@ export const Product = {
       },
     },
 
-    userId: { type: 'string' },
     brandId: { type: 'string' },
     rentPrice: { type: 'number' },
     purchasePrice: { type: 'number' },
@@ -262,9 +307,13 @@ export const Product = {
     id: '5ebac534954b54139806c112',
     // property example
 
-    featureIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
+    colors: ['yellow'],
 
-    userId: '673c40cd59e293827f79e398',
+    productionYear: '2023',
+
+    type: 'piece',
+
+    featureIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
 
     brandId: '673c40cd59e293827f79e398',
 
@@ -287,6 +336,22 @@ export const createProduct = {
   properties: {
     // create property
 
+    colors: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+
+    productionYear: {
+      type: 'string',
+      default: '',
+    },
+    type: {
+      type: 'string',
+      enum: ['piece', 'car'],
+    },
+
     featureIds: {
       type: 'array',
       items: {
@@ -294,7 +359,6 @@ export const createProduct = {
       },
     },
 
-    userId: { type: 'string' },
     brandId: { type: 'string' },
     rentPrice: { type: 'number' },
     purchasePrice: { type: 'number' },
@@ -305,9 +369,13 @@ export const createProduct = {
   example: {
     // create property example
 
-    featureIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
+    colors: ['yellow'],
 
-    userId: '673c40cd59e293827f79e398',
+    productionYear: '2023',
+
+    type: 'piece',
+
+    featureIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
 
     brandId: '673c40cd59e293827f79e398',
 
@@ -324,7 +392,7 @@ export const createProduct = {
   required: [
     // required property
 
-    'userId',
+    'productionYear',
 
     'brandId',
 
@@ -342,6 +410,22 @@ export const updateProduct = {
   properties: {
     // update property
 
+    colors: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+
+    productionYear: {
+      type: 'string',
+    },
+
+    type: {
+      type: 'string',
+      enum: ['piece', 'car'],
+    },
+
     featureIds: {
       type: 'array',
       items: {
@@ -349,7 +433,6 @@ export const updateProduct = {
       },
     },
 
-    userId: { type: 'string' },
     brandId: { type: 'string' },
     rentPrice: { type: 'number' },
     purchasePrice: { type: 'number' },
@@ -360,9 +443,13 @@ export const updateProduct = {
   example: {
     // update property example
 
-    featureIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
+    colors: ['yellow'],
 
-    userId: '673c40cd59e293827f79e398',
+    productionYear: '2023',
+
+    type: 'piece',
+
+    featureIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
 
     brandId: '673c40cd59e293827f79e398',
 

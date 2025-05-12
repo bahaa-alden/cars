@@ -3,7 +3,7 @@ const collectPromisesResults = (callback) => async (prevValues) => {
 
   return { ...prevValues, ...results };
 };
-const d = (input, index) => {
+const formatCamals = (input, index) => {
   let arr = input.trim().split(' ');
   let i = index;
   for (i; i < arr.length; i++)
@@ -12,6 +12,7 @@ const d = (input, index) => {
     }
   return arr.join('');
 };
+
 const eqValueFormat = (values, field) => {
   values[field.charAt(0).toUpperCase() + field.slice(1)] = values[field]
     .trim()
@@ -50,7 +51,7 @@ module.exports = {
           return true;
         },
         format: (input) => {
-          return d(input, 0);
+          return formatCamals(input, 0);
         },
       })
       .then(
@@ -72,7 +73,7 @@ module.exports = {
               return true;
             },
             format: (input) => {
-              return d(input, 1);
+              return formatCamals(input, 1);
             },
           });
         }),

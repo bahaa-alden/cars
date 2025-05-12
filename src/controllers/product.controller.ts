@@ -14,7 +14,6 @@ import {
 } from '../schemas/product.schema';
 import { defaultOrderParams } from '../utils/order';
 import { defaultPaginationParams } from '../utils/pagination';
-import { RoleCode } from '../utils/enum';
 import { needRecord } from '../utils/record';
 
 export class ProductController {
@@ -28,7 +27,17 @@ export class ProductController {
       const options: ProductFindOptions = {
         filter: {
           // filters
-          userId: req.valid.query.userId,
+          rentPriceGte: req.valid.query.rentPriceGte,
+
+          rentPriceLte: req.valid.query.rentPriceLte,
+
+          purchasePriceGte: req.valid.query.purchasePriceGte,
+
+          purchasePriceLte: req.valid.query.purchasePriceLte,
+
+          productionYear: req.valid.query.productionYear,
+
+          type: req.valid.query.type,
 
           categoryId: req.valid.query.categoryId,
 

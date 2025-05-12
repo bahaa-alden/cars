@@ -14,6 +14,7 @@ export interface ICategory extends MongooseDocument {
 const categorySchema: Schema = new Schema<ICategory>(
   {
     // <creating-property-schema />
+    //TODO
     name: {
       type: String,
       index: 'text',

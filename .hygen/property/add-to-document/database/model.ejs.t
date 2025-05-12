@@ -25,32 +25,34 @@ after:  \<creating\-property\-schema \/\>
         <% if (isArray) {-%>default: [],<% }-%>
       },
 <% } else if (kind === 'enum') { -%>
-  <%= property %>:<% if (isArray) {-%>[ <% }-%>{
-      type: String,
+  <%= property %>: {
+      type: <% if (isArray) {-%>[ <% }-%>String<% if (isArray) {-%>] <% }-%>,
       enum: Object.values(<%= EnumType %>),
-    }<% if (isArray) {-%>] <% }-%>
+    }
     ,
 <% } else { -%>
-    <%= property %>:<% if (isArray) {-%> [ <% }-%> {
+    <%= property %>: {
        <% if (kind === 'object') { -%>
-      // <creating-property-object-<%= property %> />
+      type: <% if (isArray) {-%> [ <% }-%>{
+        // <creating-property-object-<%= property %> />
+      }<% if (isArray) {-%>] <% }-%>,
       <% }-%>
        <% if (kind === 'primitive') { -%>
       <% if (type === 'string') { -%>
-      type: String,
+      type: <% if (isArray) {-%> [ <% }-%>String<% if (isArray) {-%>] <% }-%>,
       <% if (isText) { -%>
        index: 'text',
       <% } -%>
 
       <% } else if (type === 'number') { -%>
-      type: Number,
+      type: <% if (isArray) {-%> [ <% }-%>Number<% if (isArray) {-%>] <% }-%>,
     <% } else if (type === 'boolean') { -%>
-      type: Boolean,
+      type: <% if (isArray) {-%> [ <% }-%>Boolean<% if (isArray) {-%>] <% }-%>,
     <% } else if (type === 'date') { -%>
-          type: Date,
+          type: <% if (isArray) {-%> [ <% }-%>Date<% if (isArray) {-%>] <% }-%>,
     <% } -%>
    <% }-%>
+    <% if (isArray) {-%>default: []<% }-%>
     }
-    <% if (isArray) {-%>] <% }-%>
     ,
 <% } -%>

@@ -1,3 +1,5 @@
+import { ProductType } from './../../utils/enum';
+
 import { endOfDay, startOfDay } from 'date-fns';
 
 import { UpdateQuery, type FilterQuery } from 'mongoose';
@@ -9,7 +11,17 @@ import { selectedFields } from '../../utils/projection';
 
 export interface ProductFilterOptions {
   //filters
-  userId?: string;
+  rentPriceGte?: number;
+
+  rentPriceLte?: number;
+
+  purchasePriceGte?: number;
+
+  purchasePriceLte?: number;
+
+  productionYear?: string;
+
+  type?: ProductType;
 
   categoryId?: string;
 
@@ -34,13 +46,13 @@ export class ProductRepository extends BaseRepository<IProduct> {
   ): Promise<IProduct | null> {
     return await this.model
       .findByIdAndUpdate(id, data, { new: true })
-      .populate(['user', 'brand', 'features', 'category']);
+      .populate(['brand', 'features', 'category']);
   }
 
   async findById(id: string): Promise<IProduct | null> {
     return await this.model
       .findOne({ _id: id, deletedAt: null })
-      .populate(['user', 'brand', 'features', 'category']);
+      .populate(['brand', 'features', 'category']);
   }
 
   async findForAdmin(
@@ -49,8 +61,28 @@ export class ProductRepository extends BaseRepository<IProduct> {
     const { order, pagination, search, fields, filter } = options;
 
     const query: FilterQuery<IProduct> = { deletedAt: null };
-    if (filter?.userId) {
-      query.userId = filter.userId;
+    if (filter?.rentPriceGte) {
+      query.rentPrice = { $gte: filter.rentPriceGte };
+    }
+
+    if (filter?.rentPriceLte) {
+      query.rentPrice = { $lte: filter.rentPriceLte };
+    }
+
+    if (filter?.purchasePriceGte) {
+      query.purchasePrice = { $gte: filter.purchasePriceGte };
+    }
+
+    if (filter?.purchasePriceLte) {
+      query.purchasePrice = { $lte: filter.purchasePriceLte };
+    }
+
+    if (filter?.productionYear) {
+      query.productionYear = filter.productionYear;
+    }
+
+    if (filter?.type) {
+      query.type = filter.type;
     }
 
     if (filter?.categoryId) {
@@ -84,7 +116,7 @@ export class ProductRepository extends BaseRepository<IProduct> {
       })
       .limit(pagination.pageSize)
       .skip((pagination.page - 1) * pagination.pageSize)
-      .populate(['user', 'brand', 'features', 'category']);
+      .populate(['brand', 'features', 'category']);
 
     if (fields) {
       queryResult.select(selectedFields(fields));
