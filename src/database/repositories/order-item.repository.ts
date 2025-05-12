@@ -1,4 +1,4 @@
-import { ItemType } from './../../utils/enum';
+import { ItemType, OrderItemStatus } from './../../utils/enum';
 
 import { type FilterQuery } from 'mongoose';
 import { type PaginatedList } from '../../utils/pagination';
@@ -21,6 +21,14 @@ export interface OrderItemFindOptions
 export class OrderItemRepository extends BaseRepository<IOrderItem> {
   constructor() {
     super(OrderItem);
+  }
+
+  async findByIdToReturned(id: string): Promise<IOrderItem | null> {
+    return this.model.findOne({
+      _id: id,
+      itemType: ItemType.rent,
+      status: OrderItemStatus.notreturned,
+    });
   }
 
   async findForAdmin(

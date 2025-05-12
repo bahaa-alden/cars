@@ -126,7 +126,7 @@ export class OrderItemController {
       res: Response,
     ): Promise<void> => {
       const orderItem = needRecord(
-        await orderItemRepository.findById(req.valid.params.id),
+        await orderItemRepository.findByIdToReturned(req.valid.params.id),
         new NotFoundError('OrderItem not found'),
       );
 

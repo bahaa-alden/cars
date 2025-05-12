@@ -30,13 +30,19 @@ export class OrderRepository extends BaseRepository<IOrder> {
   ): Promise<IOrder | null> {
     return await this.model
       .findByIdAndUpdate(id, data, { new: true })
-      .populate(['user', 'orderItems']);
+      .populate([
+        'user',
+        { path: 'orderItems', populate: { path: 'product' } },
+      ]);
   }
 
   async findById(id: string): Promise<IOrder | null> {
     return await this.model
       .findOne({ _id: id, deletedAt: null })
-      .populate(['user', 'orderItems']);
+      .populate([
+        'user',
+        { path: 'orderItems', populate: { path: 'product' } },
+      ]);
   }
 
   async findForAdmin(
