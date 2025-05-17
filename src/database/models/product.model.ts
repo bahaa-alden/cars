@@ -14,6 +14,9 @@ import { omit } from 'lodash';
 export interface IProduct extends MongooseDocument {
   id: string;
   // <creating-property-interface />
+  images?: string[];
+
+  mainImage?: string;
 
   colors?: string[];
 
@@ -43,6 +46,14 @@ export interface IProduct extends MongooseDocument {
 const productSchema: Schema = new Schema<IProduct>(
   {
     // <creating-property-schema />
+    images: {
+      type: [String],
+
+      default: [],
+    },
+    mainImage: {
+      type: String,
+    },
     colors: {
       type: [String],
       default: [],

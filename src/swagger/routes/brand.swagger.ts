@@ -213,11 +213,18 @@ export const Brand = {
   properties: {
     id: { type: 'string' },
     // property
+
+    image: {
+      type: 'string',
+    },
+
     name: { type: 'string' },
   },
   example: {
     id: '5ebac534954b54139806c112',
     // property example
+    image: 'https://amazonlogo.png',
+
     name: 'BMW',
 
     createdAt: '2024-11-24T16:35:04.438Z',
@@ -228,14 +235,22 @@ export const createBrand = {
   type: 'object',
   properties: {
     // create property
+
+    image: {
+      type: 'string',
+    },
+
     name: { type: 'string' },
   },
   example: {
     // create property example
+    image: 'https://amazonlogo.png',
+
     name: 'BMW',
   },
   required: [
     // required property
+
     'name',
   ],
 };
@@ -243,10 +258,17 @@ export const updateBrand = {
   type: 'object',
   properties: {
     // update property
+
+    image: {
+      type: 'string',
+    },
+
     name: { type: 'string' },
   },
   example: {
     // update property example
+    image: 'https://amazonlogo.png',
+
     name: 'BMW',
   },
 };

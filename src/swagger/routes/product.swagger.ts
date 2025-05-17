@@ -279,6 +279,17 @@ export const Product = {
     id: { type: 'string' },
     // property
 
+    images: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+
+    mainImage: {
+      type: 'string',
+    },
+
     colors: {
       type: 'array',
       items: {
@@ -312,6 +323,9 @@ export const Product = {
   example: {
     id: '5ebac534954b54139806c112',
     // property example
+    images: ['https://prs.jog'],
+
+    mainImage: 'https://pr.jpg',
 
     colors: ['yellow'],
 
@@ -341,6 +355,17 @@ export const createProduct = {
   type: 'object',
   properties: {
     // create property
+
+    images: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+
+    mainImage: {
+      type: 'string',
+    },
 
     colors: {
       type: 'array',
@@ -374,6 +399,9 @@ export const createProduct = {
   },
   example: {
     // create property example
+    images: ['https://prs.jog'],
+
+    mainImage: 'https://pr.jpg',
 
     colors: ['yellow'],
 
@@ -416,6 +444,17 @@ export const updateProduct = {
   properties: {
     // update property
 
+    images: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+
+    mainImage: {
+      type: 'string',
+    },
+
     colors: {
       type: 'array',
       items: {
@@ -448,6 +487,9 @@ export const updateProduct = {
   },
   example: {
     // update property example
+    images: ['https://prs.jog'],
+
+    mainImage: 'https://pr.jpg',
 
     colors: ['yellow'],
 

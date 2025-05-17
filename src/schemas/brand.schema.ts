@@ -27,6 +27,8 @@ export type IBrandAllSchema = TypeOf<typeof brandAllSchema>;
 const brandCreateSchema = z
   .object({
     // <creating-property-create-schema />
+    image: z.string().optional(),
+
     name: z.string(),
   })
   .strict();
@@ -36,6 +38,8 @@ export type IBrandCreateSchema = TypeOf<typeof brandCreateSchema>;
 const brandUpdateSchema = z
   .object({
     // <creating-property-update-schema />
+    image: z.string().optional().optional(),
+
     name: z.string().optional(),
   })
   .strict();

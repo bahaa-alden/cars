@@ -36,6 +36,10 @@ export type IProductAllSchema = TypeOf<typeof productAllSchema>;
 const productCreateSchema = z
   .object({
     // <creating-property-create-schema />
+    images: z.array(z.string()).optional(),
+
+    mainImage: z.string().optional(),
+
     colors: z.array(z.string()).optional(),
     productionYear: z.string(),
     type: z.nativeEnum(ProductType).optional(),
@@ -54,6 +58,10 @@ export type IProductCreateSchema = TypeOf<typeof productCreateSchema>;
 const productUpdateSchema = z
   .object({
     // <creating-property-update-schema />
+    images: z.array(z.string()).optional().optional(),
+
+    mainImage: z.string().optional().optional(),
+
     colors: z.array(z.string()).optional().optional(),
     productionYear: z.string().optional(),
     type: z.nativeEnum(ProductType).optional(),

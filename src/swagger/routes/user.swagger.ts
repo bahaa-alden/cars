@@ -302,6 +302,16 @@ export const User = {
     id: { type: 'string' },
     // property
 
+    address: {
+      type: 'object',
+      properties: {
+        // properties address
+        country: { type: 'string' },
+        street: { type: 'string' },
+        city: { type: 'string' },
+      },
+    },
+    phone: { type: 'string' },
     balance: { type: 'number' },
     email: { type: 'string', format: 'email' },
     name: { type: 'string' },
@@ -312,6 +322,13 @@ export const User = {
     id: '5ebac534954b54139806c112',
     // property example
 
+    address: {
+      // property example address
+      country: 'syria',
+      street: 'ibn-zaher',
+      city: 'aleppo',
+    },
+    phone: '0950513333',
     balance: 2500,
     email: 'user@gmail.com',
     name: 'bahaa alden abdo',
@@ -324,6 +341,16 @@ export const createUser = {
   properties: {
     // create property
 
+    address: {
+      type: 'object',
+      properties: {
+        // create properties address
+        country: { type: 'string' },
+        street: { type: 'string' },
+        city: { type: 'string' },
+      },
+    },
+    phone: { type: 'string' },
     balance: { type: 'number' },
     name: { type: 'string' },
     email: { type: 'string' },
@@ -333,6 +360,14 @@ export const createUser = {
   example: {
     // create property example
 
+    address: {
+      // create property example address
+      country: 'syria',
+      street: 'ibn-zaher',
+      city: 'aleppo',
+    },
+
+    phone: '0950513333',
     balance: 2500,
     name: 'Bahaa abdo',
     email: 'bad@gmail.com',
@@ -346,12 +381,29 @@ export const updateMe = {
   properties: {
     // update property
 
+    address: {
+      type: 'object',
+      properties: {
+        // update properties address
+        country: { type: 'string' },
+        street: { type: 'string' },
+        city: { type: 'string' },
+      },
+    },
+    phone: { type: 'string' },
     name: { type: 'string' },
     email: { type: 'string' },
   },
   example: {
     // update property example
 
+    address: {
+      // update property example address
+      country: 'syria',
+      street: 'ibn-zaher',
+      city: 'aleppo',
+    },
+    phone: '0950513333',
     name: 'Bahaa alden',
     email: 'bah@gmail.com',
   },
@@ -366,6 +418,16 @@ export const updateUser = {
     email: { type: 'string' },
     role: { type: 'string', enum: Object.values(RoleCode) },
     balance: { type: 'number' },
+    address: {
+      type: 'object',
+      properties: {
+        // update properties address
+        country: { type: 'string' },
+        street: { type: 'string' },
+        city: { type: 'string' },
+      },
+    },
+    phone: { type: 'string' },
   },
   example: {
     // update property example
@@ -374,5 +436,12 @@ export const updateUser = {
     email: 'ba@gmail.com',
     role: 'USER',
     balance: 2500,
+    address: {
+      // update property example address
+      country: 'syria',
+      street: 'ibn-zaher',
+      city: 'aleppo',
+    },
+    phone: '0950513333',
   },
 };

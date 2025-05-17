@@ -217,12 +217,31 @@ export const signUp = {
   properties: {
     //  property signup
 
+    address: {
+      type: 'object',
+      properties: {
+        // properties address
+        country: { type: 'string' },
+        street: { type: 'string' },
+        city: { type: 'string' },
+      },
+    },
+    phone: { type: 'string' },
     name: { type: 'string' },
     email: { type: 'string' },
     password: { type: 'string' },
   },
   example: {
     // create property example
+
+    // create property example address
+    address: {
+      // property example address
+      country: 'syria',
+      street: 'ibn-zaher',
+      city: 'aleppo',
+    },
+    phone: '0950513333',
 
     name: 'Adel Seirafi',
     email: 'user@gmail.com',

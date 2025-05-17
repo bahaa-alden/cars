@@ -4,6 +4,8 @@ import { omit } from 'lodash';
 export interface IBrand extends MongooseDocument {
   id: string;
   // <creating-property-interface />
+  image?: string;
+
   name: string;
 
   createdAt: Date;
@@ -14,6 +16,9 @@ export interface IBrand extends MongooseDocument {
 const brandSchema: Schema = new Schema<IBrand>(
   {
     // <creating-property-schema />
+    image: {
+      type: String,
+    },
     //TODO
     name: {
       type: String,

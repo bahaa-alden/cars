@@ -20,6 +20,7 @@ import Logger from './core/Logger';
 import swaggerSpec from './swagger/swagger';
 import { NotFoundError } from './core/ApiError';
 import { join } from 'path';
+import { imageRoutes } from './routes/image.routes';
 class Server {
   public app: express.Application;
 
@@ -32,6 +33,8 @@ class Server {
   }
 
   public routes(): void {
+    this.app.use('/api/v1/images', imageRoutes.router);
+
     this.app.use('/api/v1/order-items', orderItemRoutes.router);
 
     this.app.use('/api/v1/orders', orderRoutes.router);
