@@ -236,6 +236,8 @@ export const Order = {
         type: 'object',
         properties: {
           // properties orderItems
+          rentDurationInWeeks: { type: 'number' },
+
           quantity: { type: 'number' },
           price: { type: 'number' },
           itemType: { type: 'string', enum: ['rent', 'purchase'] },
@@ -257,6 +259,8 @@ export const Order = {
     orderItems: [
       {
         // property example orderItems
+        rentDurationInWeeks: 1,
+
         productId: '673c40cd59e293827f79e398',
 
         quantity: 1,
@@ -283,6 +287,8 @@ export const createOrder = {
         type: 'object',
         properties: {
           // create properties orderItems
+          rentDurationInWeeks: { type: 'number' },
+
           product: { type: 'string' },
           price: { type: 'number' },
           itemType: { type: 'string', enum: ['rent', 'purchase'] },
@@ -304,6 +310,8 @@ export const createOrder = {
     orderItems: [
       {
         // create property example orderItems
+        rentDurationInWeeks: 1,
+
         productId: '673c40cd59e293827f79e398',
 
         quantity: 1,
@@ -338,6 +346,8 @@ export const updateOrder = {
         type: 'object',
         properties: {
           // update properties orderItems
+          rentDurationInWeeks: { type: 'number' },
+
           product: { type: 'string' },
           price: { type: 'number' },
           itemType: { type: 'string', enum: ['rent', 'purchase'] },
@@ -358,6 +368,8 @@ export const updateOrder = {
     orderItems: [
       {
         // update property example orderItems
+        rentDurationInWeeks: 1,
+
         productId: '673c40cd59e293827f79e398',
 
         quantity: 1,

@@ -29,6 +29,8 @@ export type IOrderItemAllSchema = TypeOf<typeof orderItemAllSchema>;
 const orderItemCreateSchema = z
   .object({
     // <creating-property-create-schema />
+    rentDurationInWeeks: z.number().optional(),
+
     status: z.nativeEnum(OrderItemStatus).optional(),
 
     price: z.number().optional(),
@@ -44,6 +46,8 @@ export type IOrderItemCreateSchema = TypeOf<typeof orderItemCreateSchema>;
 const orderItemUpdateSchema = z
   .object({
     // <creating-property-update-schema />
+    rentDurationInWeeks: z.number().optional().optional(),
+
     status: z.nativeEnum(OrderItemStatus).optional(),
 
     price: z.number().optional().optional(),

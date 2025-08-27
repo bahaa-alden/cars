@@ -264,6 +264,10 @@ export const OrderItem = {
     id: { type: 'string' },
     // property
 
+    rentDurationInWeeks: {
+      type: 'number',
+    },
+
     status: {
       type: 'string',
       enum: ['returned', 'notreturned'],
@@ -293,6 +297,8 @@ export const OrderItem = {
   example: {
     id: '5ebac534954b54139806c112',
     // property example
+    rentDurationInWeeks: 1,
+
     status: 'returned',
 
     price: 3200,
@@ -313,6 +319,10 @@ export const createOrderItem = {
   type: 'object',
   properties: {
     // create property
+
+    rentDurationInWeeks: {
+      type: 'number',
+    },
 
     status: {
       type: 'string',
@@ -342,6 +352,8 @@ export const createOrderItem = {
   },
   example: {
     // create property example
+    rentDurationInWeeks: 1,
+
     status: 'returned',
 
     price: 3200,
@@ -364,6 +376,10 @@ export const updateOrderItem = {
   type: 'object',
   properties: {
     // update property
+
+    rentDurationInWeeks: {
+      type: 'number',
+    },
 
     status: {
       type: 'string',
@@ -393,6 +409,8 @@ export const updateOrderItem = {
   },
   example: {
     // update property example
+    rentDurationInWeeks: 1,
+
     status: 'returned',
 
     price: 3200,

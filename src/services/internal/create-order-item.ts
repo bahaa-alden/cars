@@ -30,7 +30,7 @@ export const createOrderItem = async (
     const servicePrice =
       item.itemType === ItemType.purchase
         ? product.purchasePrice
-        : product.rentPrice;
+        : product.rentPrice * (item.rentDurationInWeeks || 1);
     item.price = servicePrice * item.quantity;
   }
 

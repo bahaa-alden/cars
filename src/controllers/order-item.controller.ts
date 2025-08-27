@@ -138,11 +138,13 @@ export class OrderItemController {
         differenceInDays(new Date(), orderItem.createdAt) / 7,
       );
 
-      const user = needRecord(await userRepository.findById(order.userId));
-
-      user.balance = user.balance - (weeks - 1) * orderItem.price;
-      await userRepository.patchById(user.id, user);
-
+      if (weeks > orderItem.rentDurationInWeeks) {
+        const user = needRecord(await userRepository.findById(order.userId));
+        user.balance =
+          user.balance -
+          (weeks - orderItem.rentDurationInWeeks) * orderItem.price;
+        await userRepository.patchById(user.id, user);
+      }
       orderItem.status = OrderItemStatus.returned;
       await orderItemRepository.patchById(orderItem.id, orderItem);
       res.ok({ message: 'success', data: orderItem });

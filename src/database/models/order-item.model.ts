@@ -14,6 +14,8 @@ import { omit } from 'lodash';
 export interface IOrderItem extends MongooseDocument {
   id: string;
   // <creating-property-interface />
+  rentDurationInWeeks: number;
+
   status?: OrderItemStatus;
 
   price: number;
@@ -36,6 +38,10 @@ export interface IOrderItem extends MongooseDocument {
 const orderItemSchema: Schema = new Schema<IOrderItem>(
   {
     // <creating-property-schema />
+    rentDurationInWeeks: {
+      type: Number,
+      default: 1,
+    },
     status: {
       type: String,
       enum: Object.values(OrderItemStatus),

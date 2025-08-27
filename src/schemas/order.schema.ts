@@ -10,6 +10,8 @@ import { orderColumn, orderDirection, page, pageSize } from './common';
 const orderItemsCreateSchema = z.object({
   // <creating-property-create-schema-orderItems />
 
+  rentDurationInWeeks: z.number().optional(),
+
   productId: objectId,
 
   quantity: z.number(),
@@ -22,6 +24,8 @@ export type IOrderItemsCreateSchema = TypeOf<typeof orderItemsCreateSchema>;
 
 const orderItemsUpdateSchema = z.object({
   // <creating-property-update-schema-orderItems />
+
+  rentDurationInWeeks: z.number().optional(),
 
   productId: objectId.optional(),
 
